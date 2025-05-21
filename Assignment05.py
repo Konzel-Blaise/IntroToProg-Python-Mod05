@@ -32,7 +32,7 @@ student_first_name: str = ''  # Holds the first name of a student entered by the
 student_last_name: str = ''  # Holds the last name of a student entered by the user.
 course_name: str = ''  # Holds the name of a course entered by the user.
 student_data: dict[str, str] = []  # one row of student data 
-students: list = []  # a table of student data
+students: dict = []  # a table of student data
 file = None  # Holds a reference to an opened file.
 menu_choice: str  # Hold the choice made by the user.
 
@@ -54,14 +54,12 @@ except Exception as e:
 
 # Present and Process the data
 while (True):
-
     # Present the menu of choices
     print(MENU)
     menu_choice = input("What would you like to do: ")
-
     # Input user data
     if menu_choice == "1":  # This will not work if it is an integer!
-        
+        #taking input in the form of characters only for first and last names
         student_first_name = isletters(input("Please enter the student's first name: "))
         student_last_name = isletters(input("Please enter the student's last name: "))
         course_name = input("Please enter the name of the course: ")
@@ -71,17 +69,14 @@ while (True):
         students.append(student_data)
         print(f"\nYou have registered {student_data['FirstName']} {student_data['LastName']} for {student_data['CourseName']}.")
         continue
-
     # Present the current data
     elif menu_choice == "2":
-
         # Process the data to create and display a custom message
         print("-"*50)
         for student in students:
             print(f"Student {student['FirstName']} {student['LastName']} is enrolled in {student['CourseName']}.")
         print("-"*50)
         continue
-
     # Save the data to a file
     elif menu_choice == "3":
         #open json with 'as' clause... automatically closes when finished
